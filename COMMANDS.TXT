@@ -1,0 +1,342 @@
+                        #===========================#
+                        # Command list for Mini-SPS #
+                        #===========================#
+
+
+Cmd       = The AWL command
+Parameter = Type of parameter
+Area      = Area of parameter value
+R         = Change the result flag
+K         = Change the K register
+FF        = Change the first flag
+PE        = Force a new AWL loop
+
+
+Parameter types:
+
+E = Inputs
+A = Outputs
+M = Memory
+T = Timer
+Z = Counter
+I = Pulse
+K = K register
+D = Text modules for display (comming soon)
+
+
++-----+-------------+-------+---+---+----+----+------------------------------+
+| Cmd | Parameter   | Area  | R | K | FF | PE | Description                  |
++-----+-------------+-------+---+---+----+----+------------------------------+
+| NOP | -           | -     | - | - | -  | -  | No operation                 |
+|     |             |       |   |   |    |    |                              |
+| U   | E,A,M,T,Z,I | 0-255 | * | - | *  | -  | Bit combine with AND         |
+| UN  | E,A,M,T,T,I | 0-255 | * | - | *  | -  | Bit combine with AND NOT     |
+| O   | E,A,M,T,Z,I | 0-255 | * | - | *  | -  | Bit combine with OR          |
+| ON  | E,A,M,T,T,I | 0-255 | * | - | *  | -  | Bit combine with OR NOT      |
+| X   | E,A,M,T,Z,I | 0-255 | * | - | *  | -  | Bit combine with XOR         |
+| XN  | E,A,M,T,T,I | 0-255 | * | - | *  | -  | Bit combine with XOR NOT     |
+|     |             |       |   |   |    |    |                              |
+| L   | E,A,M,T,Z,I | 0-255 | * | - | *  | -  | Get parameter state in       |
+|     |             |       |   |   |    |    | result                       |
+| LN  | E,A,M,T,Z,I | 0-255 | * | - | *  | -  | Get inverted parameter state |
+|     |             |       |   |   |    |    | in result                    |
+|     |             |       |   |   |    |    |                              |
+| =   | E,A,M       | 0-255 | - | - | *  | -  | Send result to parameter     |
+|     |             |       |   |   |    |    |                              |
+| =   | T           | 0-255 | - | - | *  | -  | If Result start timer with   |
+|     |             |       |   |   |    |    | K*0.1 seconds otherwise      |
+|     |             |       |   |   |    |    | reset the timer              |
+|     |             |       |   |   |    |    |                              |
+| =   | Z           | 0-255 | - | - | *  | -  | If result set the counter    |
+|     |             |       |   |   |    |    | with value of K              |
+|     |             |       |   |   |    |    |                              |
+| =   | I           | 0-255 | - | - | *  | -  | Start a pulse                |
+|     |             |       |   |   |    |    |                              |
+| =N  | E,A,M       | 0-255 | - | - | *  | -  | Send inverted result to      |
+|     |             |       |   |   |    |    | parameter                    |
+|     |             |       |   |   |    |    |                              |
+| S   | E,A,M       | 0-255 | - | - | *  | -  | If result set the parameter  |
+| R   | E,A,M       | 0-255 | - | - | *  | -  | If result reset the          |
+|     |             |       |   |   |    |    | parameter                    |
+|     |             |       |   |   |    |    |                              |
+| PE  | -           | -     | - | - | -  | *  | Start a new loop             |
+| PEB | -           | -     | - | - | *  | *  | If result start a new loop   |
+| PEN | -           | -     | - | - | *  | *  | If not result start a new    |
+|     |             |       |   |   |    |    | loop                         |
+|     |             |       |   |   |    |    |                              |
+| U(  | -           | -     | * | - | *  | -  | Open brackt with AND         |
+| UN( | -           | -     | * | - | *  | -  | Open brackt with AND NOT     |
+| O(  | -           | -     | * | - | *  | -  | Open brackt with OR          |
+| ON( | -           | -     | * | - | *  | -  | Open brackt with OR NOT      |
+| X(  | -           | -     | * | - | *  | -  | Open brackt with XOR         |
+| XN( | -           | -     | * | - | *  | -  | Open brackt with XOR NOT     |
+| )   | -           | -     | * | - | *  | -  | Close bracket and combine    |
+|     |             |       |   |   |    |    | result with saved result     |
+|     |             |       |   |   |    |    |                              |
+| LB  | E,A,M       | 0-31  | - | * | -  | -  | Load parameter byte in K     |
+|     |             |       |   |   |    |    |                              |
+| LB  | T           | 0-255 | - | * | -  | -  | Load timer value in K        |
+|     |             |       |   |   |    |    |                              |
+| LB  | Z           | 0-255 | - | * | -  | -  | Load counter value in K      |
+|     |             |       |   |   |    |    |                              |
+| LB  | K           | 0-255 | - | * | -  | -  | Load parameter in K          |
+|     |             |       |   |   |    |    |                              |
+| LNB | E,A,M       | 0-31  | - | * | -  | -  | Load inverted parameter byte |
+|     |             |       |   |   |    |    | in K                         |
+|     |             |       |   |   |    |    |                              |
+| LNB | T           | 0-255 | - | * | -  | -  | Load inverted timer value    |
+|     |             |       |   |   |    |    | in K                         |
+|     |             |       |   |   |    |    |                              |
+| LNB | Z           | 0-255 | - | * | -  | -  | Load inverted counter value  |
+|     |             |       |   |   |    |    | in K                         |
+|     |             |       |   |   |    |    |                              |
+| LNB | K           | 0-255 | - | * | -  | -  | Load invertes parameter in K |
+|     |             |       |   |   |    |    |                              |
+| =B  | E,A,M       | 0-31  | - | - | -  | -  | Send K to parameter byte     |
+|     |             |       |   |   |    |    |                              |
+| =B  | T           | 0-255 | - | - | -  | -  | Send K to timer value        |
+|     |             |       |   |   |    |    |                              |
+| =B  | Z           | 0-255 | - | - | -  | -  | Send K to counter value      |
+|     |             |       |   |   |    |    |                              |
+| =NB | E,A,M       | 0-31  | - | - | -  | -  | Send inverted K to parameter |
+|     |             |       |   |   |    |    | byte                         |
+|     |             |       |   |   |    |    |                              |
+| =NB | T           | 0-255 | - | - | -  | -  | Send inverted K to timer     |
+|     |             |       |   |   |    |    | value                        |
+|     |             |       |   |   |    |    |                              |
+| =NB | Z           | 0-255 | - | - | -  | -  | Send inverted K to counter   |
+|     |             |       |   |   |    |    | value                        |
+|     |             |       |   |   |    |    |                              |
+| UB  | E,A,M       | 0-31  | - | * | -  | -  | Combine K and parameter byte |
+|     |             |       |   |   |    |    | with AND                     |
+|     |             |       |   |   |    |    |                              |
+| UB  | T           | 0-255 | - | * | -  | -  | Combine K and timer value    |
+|     |             |       |   |   |    |    | with AND                     |
+|     |             |       |   |   |    |    |                              |
+| UB  | Z           | 0-255 | - | * | -  | -  | Combine K and counter value  |
+|     |             |       |   |   |    |    | with AND                     |
+|     |             |       |   |   |    |    |                              |
+| UB  | K           | 0-255 | - | * | -  | -  | Combine K and parameter      |
+|     |             |       |   |   |    |    | with AND                     |
+|     |             |       |   |   |    |    |                              |
+| UNB | E,A,M       | 0-31  | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | parameter byte with AND      |
+|     |             |       |   |   |    |    |                              |
+| UNB | T           | 0-255 | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | timer value with AND         |
+|     |             |       |   |   |    |    |                              |
+| UNB | Z           | 0-255 | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | counter value with AND       |
+|     |             |       |   |   |    |    |                              |
+| UNB | K           | 0-255 | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | parameter with AND           |
+|     |             |       |   |   |    |    |                              |
+| OB  | E,A,M       | 0-31  | - | * | -  | -  | Combine K and parameter byte |
+|     |             |       |   |   |    |    | with OR                      |
+|     |             |       |   |   |    |    |                              |
+| OB  | T           | 0-255 | - | * | -  | -  | Combine K and timer value    |
+|     |             |       |   |   |    |    | with OR                      |
+|     |             |       |   |   |    |    |                              |
+| OB  | Z           | 0-255 | - | * | -  | -  | Combine K and counter value  |
+|     |             |       |   |   |    |    | with OR                      |
+|     |             |       |   |   |    |    |                              |
+| OB  | K           | 0-255 | - | * | -  | -  | Combine K and parameter      |
+|     |             |       |   |   |    |    | with OR                      |
+|     |             |       |   |   |    |    |                              |
+| ONB | E,A,M       | 0-31  | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | parameter byte with OR       |
+|     |             |       |   |   |    |    |                              |
+| ONB | T           | 0-255 | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | timer value with OR          |
+|     |             |       |   |   |    |    |                              |
+| ONB | Z           | 0-255 | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | counter value with OR        |
+|     |             |       |   |   |    |    |                              |
+| ONB | K           | 0-255 | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | parameter with OR            |
+|     |             |       |   |   |    |    |                              |
+| XB  | E,A,M       | 0-31  | - | * | -  | -  | Combine K and parameter byte |
+|     |             |       |   |   |    |    | with XOR                     |
+|     |             |       |   |   |    |    |                              |
+| XB  | T           | 0-255 | - | * | -  | -  | Combine K and timer value    |
+|     |             |       |   |   |    |    | with XOR                     |
+|     |             |       |   |   |    |    |                              |
+| XB  | Z           | 0-255 | - | * | -  | -  | Combine K and counter value  |
+|     |             |       |   |   |    |    | with XOR                     |
+|     |             |       |   |   |    |    |                              |
+| XB  | K           | 0-255 | - | * | -  | -  | Combine K and parameter      |
+|     |             |       |   |   |    |    | with XOR                     |
+|     |             |       |   |   |    |    |                              |
+| XNB | E,A,M       | 0-31  | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | parameter byte with XOR      |
+|     |             |       |   |   |    |    |                              |
+| XNB | T           | 0-255 | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | timer value with XOR         |
+|     |             |       |   |   |    |    |                              |
+| XNB | Z           | 0-255 | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | counter value with XOR       |
+|     |             |       |   |   |    |    |                              |
+| XNB | K           | 0-255 | - | * | -  | -  | Combine K and inverted       |
+|     |             |       |   |   |    |    | parameter with XOR           |
+|     |             |       |   |   |    |    |                              |
+| SLB | E,A,M       | 0-31  | - | * | -  | -  | Shift left the parameter     |
+|     |             |       |   |   |    |    | byte and put it in K         |
+|     |             |       |   |   |    |    |                              |
+| SLB | T           | 0-255 | - | * | -  | -  | Shift left the timer value   |
+|     |             |       |   |   |    |    | and put it in K              |
+|     |             |       |   |   |    |    |                              |
+| SLB | Z           | 0-255 | - | * | -  | -  | Shift left the counter value |
+|     |             |       |   |   |    |    | and put it in K              |
+|     |             |       |   |   |    |    |                              |
+| SLB | K           | 0-255 | - | * | -  | -  | Shift left the parameter     |
+|     |             |       |   |   |    |    | and put it in K              |
+|     |             |       |   |   |    |    |                              |
+| SRB | E,A,M       | 0-31  | - | * | -  | -  | Shift right the parameter    |
+|     |             |       |   |   |    |    | byte and put it in K         |
+|     |             |       |   |   |    |    |                              |
+| SRB | T           | 0-255 | - | * | -  | -  | Shift right the timer value  |
+|     |             |       |   |   |    |    | and put it in K              |
+|     |             |       |   |   |    |    |                              |
+| SRB | Z           | 0-255 | - | * | -  | -  | Shift right the counter      |
+|     |             |       |   |   |    |    | value and put it in K        |
+|     |             |       |   |   |    |    |                              |
+| SRB | K           | 0-255 | - | * | -  | -  | Shift right the parameter    |
+|     |             |       |   |   |    |    | and put it in K              |
+|     |             |       |   |   |    |    |                              |
+| RLB | E,A,M       | 0-31  | - | * | -  | -  | Rotate left the parameter    |
+|     |             |       |   |   |    |    | byte and put it in K         |
+|     |             |       |   |   |    |    |                              |
+| RLB | T           | 0-255 | - | * | -  | -  | Rotate left the timer value  |
+|     |             |       |   |   |    |    | and put it in K              |
+|     |             |       |   |   |    |    |                              |
+| RLB | Z           | 0-255 | - | * | -  | -  | Rotate left the counter      |
+|     |             |       |   |   |    |    | value and put it in K        |
+|     |             |       |   |   |    |    |                              |
+| RLB | K           | 0-255 | - | * | -  | -  | Rotate left the parameter    |
+|     |             |       |   |   |    |    | and put it in K              |
+|     |             |       |   |   |    |    |                              |
+| RRB | E,A,M       | 0-31  | - | * | -  | -  | Rotate right the parameter   |
+|     |             |       |   |   |    |    | byte and put it in K         |
+|     |             |       |   |   |    |    |                              |
+| RRB | T           | 0-255 | - | * | -  | -  | Rotate right the timer value |
+|     |             |       |   |   |    |    | and put it in K              |
+|     |             |       |   |   |    |    |                              |
+| RRB | Z           | 0-255 | - | * | -  | -  | Rotate right the counter     |
+|     |             |       |   |   |    |    | value and put it in K        |
+|     |             |       |   |   |    |    |                              |
+| RRB | K           | 0-255 | - | * | -  | -  | Rotate right the parameter   |
+|     |             |       |   |   |    |    | and put it in K              |
+|     |             |       |   |   |    |    |                              |
+| +B  | E,A,M       | 0-31  | - | * | -  | -  | Make K = K + parameter byte  |
+|     |             |       |   |   |    |    |                              |
+| +B  | T           | 0-255 | - | * | -  | -  | Make K = K + timer value     |
+|     |             |       |   |   |    |    |                              |
+| +B  | Z           | 0-255 | - | * | -  | -  | Make K = K + counter value   |
+|     |             |       |   |   |    |    |                              |
+| +B  | K           | 0-255 | - | * | -  | -  | Make K = K + parameter       |
+|     |             |       |   |   |    |    |                              |
+| -B  | E,A,M       | 0-31  | - | * | -  | -  | Make K = K - parameter byte  |
+|     |             |       |   |   |    |    |                              |
+| -B  | T           | 0-255 | - | * | -  | -  | Make K = K - timer value     |
+|     |             |       |   |   |    |    |                              |
+| -B  | Z           | 0-255 | - | * | -  | -  | Make K = K - counter value   |
+|     |             |       |   |   |    |    |                              |
+| -B  | K           | 0-255 | - | * | -  | -  | Make K = K - parameter       |
+|     |             |       |   |   |    |    |                              |
+| *B  | E,A,M       | 0-31  | - | * | -  | -  | Make K = K * parameter byte  |
+|     |             |       |   |   |    |    |                              |
+| *B  | T           | 0-255 | - | * | -  | -  | Make K = K * timer value     |
+|     |             |       |   |   |    |    |                              |
+| *B  | Z           | 0-255 | - | * | -  | -  | Make K = K * counter value   |
+|     |             |       |   |   |    |    |                              |
+| *B  | K           | 0-255 | - | * | -  | -  | Make K = K * parameter       |
+|     |             |       |   |   |    |    |                              |
+| /B  | E,A,M       | 0-31  | - | * | -  | -  | Make K = K / parameter byte  |
+|     |             |       |   |   |    |    |                              |
+| /B  | T           | 0-255 | - | * | -  | -  | Make K = K / timer value     |
+|     |             |       |   |   |    |    |                              |
+| /B  | Z           | 0-255 | - | * | -  | -  | Make K = K / counter value   |
+|     |             |       |   |   |    |    |                              |
+| /B  | K           | 0-255 | - | * | -  | -  | Make K = K / parameter       |
+|     |             |       |   |   |    |    |                              |
+| ==B | E,A,M       | 0-31  | * | - | *  | -  | Set result if K = parameter  |
+|     |             |       |   |   |    |    | byte otherwise cleared       |
+|     |             |       |   |   |    |    |                              |
+| ==B | T           | 0-255 | * | - | *  | -  | Set result if K = timer      |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| ==B | Z           | 0-255 | * | - | *  | -  | Set result if K = counter    |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| ==B | K           | 0-255 | * | - | *  | -  | Set result if K = parameter  |
+|     |             |       |   |   |    |    | otherwise cleared            |
+|     |             |       |   |   |    |    |                              |
+| >B  | E,A,M       | 0-31  | * | - | *  | -  | Set result if K > parameter  |
+|     |             |       |   |   |    |    | byte otherwise cleared       |
+|     |             |       |   |   |    |    |                              |
+| >B  | T           | 0-255 | * | - | *  | -  | Set result if K > timer      |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| >B  | Z           | 0-255 | * | - | *  | -  | Set result if K > counter    |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| >B  | K           | 0-255 | * | - | *  | -  | Set result if K > parameter  |
+|     |             |       |   |   |    |    | otherwise cleared            |
+|     |             |       |   |   |    |    |                              |
+| >=B | E,A,M       | 0-31  | * | - | *  | -  | Set result if K >= parameter |
+|     |             |       |   |   |    |    | byte otherwise cleared       |
+|     |             |       |   |   |    |    |                              |
+| >=B | T           | 0-255 | * | - | *  | -  | Set result if K >= timer     |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| >=B | Z           | 0-255 | * | - | *  | -  | Set result if K >= counter   |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| >=B | K           | 0-255 | * | - | *  | -  | Set result if K >= parameter |
+|     |             |       |   |   |    |    | otherwise cleared            |
+|     |             |       |   |   |    |    |                              |
+| <B  | E,A,M       | 0-31  | * | - | *  | -  | Set result if K < parameter  |
+|     |             |       |   |   |    |    | byte otherwise cleared       |
+|     |             |       |   |   |    |    |                              |
+| <B  | T           | 0-255 | * | - | *  | -  | Set result if K < timer      |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| <B  | Z           | 0-255 | * | - | *  | -  | Set result if K < counter    |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| <B  | K           | 0-255 | * | - | *  | -  | Set result if K < parameter  |
+|     |             |       |   |   |    |    |                              |
+| <=B | E,A,M       | 0-31  | * | - | *  | -  | Set result if K <= parameter |
+|     |             |       |   |   |    |    | byte otherwise cleared       |
+|     |             |       |   |   |    |    |                              |
+| <=B | T           | 0-255 | * | - | *  | -  | Set result if K <= timer     |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| <=B | Z           | 0-255 | * | - | *  | -  | Set result if K <= counter   |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| <=B | K           | 0-255 | * | - | *  | -  | Set result if K <= parameter |
+|     |             |       |   |   |    |    |                              |
+| <>B | E,A,M       | 0-31  | * | - | *  | -  | Set result if K <> parameter |
+|     |             |       |   |   |    |    | byte otherwise cleared       |
+|     |             |       |   |   |    |    |                              |
+| <>B | T           | 0-255 | * | - | *  | -  | Set result if K <> timer     |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| <>B | Z           | 0-255 | * | - | *  | -  | Set result if K <> counter   |
+|     |             |       |   |   |    |    | value otherwise cleared      |
+|     |             |       |   |   |    |    |                              |
+| <>B | K           | 0-255 | * | - | *  | -  | Set result if K <> parameter |
+|     |             |       |   |   |    |    |                              |
+| HI  | -           | -     | * | - | *  | -  | Set result                   |
+| LO  | -           | -     | * | - | *  | -  | Reset result                 |
+|     |             |       |   |   |    |    |                              |
+| ZV  | Z           | 0-255 | - | - | *  | -  | If result count up           |
+| ZR  | Z           | 0-255 | - | - | *  | -  | If result count down         |
+|     |             |       |   |   |    |    |                              |
+| STP | -           | -     | - | - | -  | *  | Stop running AWL             |
+| STB | -           | -     | - | - | -  | *  | Stop running AWL if result   |
+|     |             |       |   |   |    |    | set                          |
+| STN | -           | -     | - | - | -  | *  | Stop running AWL if result   |
+|     |             |       |   |   |    |    | cleared                      |
++-----+-------------+-------+---+---+----+----+------------------------------+
