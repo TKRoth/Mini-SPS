@@ -339,4 +339,21 @@ D = Text modules for display (comming soon)
 |     |             |       |   |   |    |    | set                          |
 | STN | -           | -     | - | - | -  | *  | Stop running AWL if result   |
 |     |             |       |   |   |    |    | cleared                      |
+|     |             |       |   |   |    |    |                              |
+| BLB | -           | -     | - | - | *  | -  | Execute the AWL until END if |
+|     |             |       |   |   |    |    | result is set                |
+| BLN | -           | -     | - | - | *  | -  | Execute the AWL until END if |
+|     |             |       |   |   |    |    | result is cleared            |
+| END | -           | -     | - | - | *  | -  | Closed the last block        |
+|     |             |       |   |   |    |    |                              |
+| DAW | -           | -     | - | - | -  | -  | Write K in data adress       |
+| DAR | -           | -     | - | - | -  | -  | Read data adress in K        |
+| DCB | -           | -     | - | - | *  | -  | Clear data block if result   |
+|     |             |       |   |   |    |    | is set                       |
+| DCN | -           | -     | - | - | *  | -  | Clear data block if result   |
+|     |             |       |   |   |    |    | is cleared                   |
+| DWR | -           | -     | - | - | -  | -  | Put K in data                |
+| DRD | -           | -     | - | * | -  | -  | Get data and put it in K     |
+|     |             |       |   |   |    |    |                              |
+| VER | -           | -     | - | * | -  | -  | Put the version in K         |
 +-----+-------------+-------+---+---+----+----+------------------------------+
