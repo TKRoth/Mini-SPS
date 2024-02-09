@@ -1,0 +1,62 @@
+                           #=======================#
+                           # Key list for Mini-SPS #
+                           #=======================#
+
+
+AWL-Editor|
+----------+
+
++-------------+--------------------------------------------------------------+
+| Key         | Function                                                     |
++-------------+--------------------------------------------------------------+
+| Return      | Compile the command in input line and save it in the AWL. If |
+|             | the command still not complete it play a signal.             |
+|             |                                                              |
+| Escape      | Clears the input line.                                       |
+|             |                                                              |
+| Tab         | Calls the main menu.                                         |
+|             |                                                              |
+| Insert      | Insert a blank line bevor the actually line.                 |
+|             |                                                              |
+| Delete      | Erase the actually line.                                     |
+|             |                                                              |
+| Cursor up   | Select the previous line. The input cleares.                 |
+|             |                                                              |
+| Cursor down | Select the next line. The input cleares.                     |
+|             |                                                              |
+| Page up     | Jump 15 lines up. The input cleares.                         |
+|             |                                                              |
+| Page down   | Jump 15 lines down. The input cleares.                       |
++-------------+--------------------------------------------------------------+
+
+
+Main menu|
+---------+
+
++-------------+--------------------------------------------------------------+
+| Key         | Function                                                     |
++-------------+--------------------------------------------------------------+
+| Cursor up   | Select previous menu entry.                                  |
+|             |                                                              |
+| Cursor down | Select next menu entry.                                      |
+|             |                                                              |
+| Return      | Execute the selected entry.                                  |
+|             |                                                              |
+| Escape      | Abort menu.                                                  |
++-------------+--------------------------------------------------------------+
+
+
+Running mode|
+------------+
+
++-------------+--------------------------------------------------------------+
+| Key         | Function                                                     |
++-------------+--------------------------------------------------------------+
+| Escape      | Stops the simulation.                                        |
+|             |                                                              |
+| F1 - F8     | Toggle the input 0 - 7 in the actually input page.           |
+|             |                                                              |
+| E / e       | Select the previous / next 8 inputs.                         |
+|             |                                                              |
+| A / a       | Select the previous / next 8 outputs.                        |
++-------------+--------------------------------------------------------------+
