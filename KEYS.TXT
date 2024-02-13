@@ -56,7 +56,27 @@ Running mode|
 |             |                                                              |
 | F1 - F8     | Toggle the input 0 - 7 in the actually input page.           |
 |             |                                                              |
-| E / e       | Select the previous / next 8 inputs.                         |
+| E / e       | Select the next / previous 8 inputs.                         |
 |             |                                                              |
-| A / a       | Select the previous / next 8 outputs.                        |
+| A / a       | Select the next / previous 8 outputs.                        |
++-------------+--------------------------------------------------------------+
+
+
+Tracing mode|
+------------+
+
++-------------+--------------------------------------------------------------+
+| Key         | Function                                                     |
++-------------+--------------------------------------------------------------+
+| Cursor up   | Tracing position + 1                                         |
+|             |                                                              |
+| Cursor down | Tracing position - 1                                         |
+|             |                                                              |
+| Page up     | Tracing position + 15                                        |
+|             |                                                              |
+| Page down   | Tracing position - 15                                        |
+|             |                                                              |
+| T / t       | Select the next / previous 8 timer                           |
+|             |                                                              |
+| Z / z       | Select the next / previous 8 counter                         |
 +-------------+--------------------------------------------------------------+
