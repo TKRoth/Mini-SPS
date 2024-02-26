@@ -80,3 +80,25 @@ Tracing mode|
 |             |                                                              |
 | Z / z       | Select the next / previous 8 counter                         |
 +-------------+--------------------------------------------------------------+
+
+
+Sign editor|
+-----------+
+
++-------------+--------------------------------------------------------------+
+| Key         | Function                                                     |
++-------------+--------------------------------------------------------------+
+| Cursor up   | Previous E/A adress                                          |
+|             |                                                              |
+| Cursor down |\                                                             |
+|             | Next E/A adress                                              |
+| Return      |/                                                             |
+|             |                                                              |
+| Cursor left |\                                                             |
+|             |                                                              |
+| Cursor right| Switch between inputs (E) and outputs (A)                    |
+|             |                                                              |
+| Tab         |/                                                             |
+|             |                                                              |
+| Escape      | Leave the sign editor                                        |
++-------------+--------------------------------------------------------------+
